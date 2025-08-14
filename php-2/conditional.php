@@ -38,12 +38,13 @@ function reverse($kata1) {
 function reverseString ($kata2) {
     $string = reverse($kata2);
     echo "Kata Asli: " . $kata2 . "<br>";
-    echo "Kata Terbalik: " . $string . "<br> <br>";
+    echo "Kata Terbalik: " . $string . "<br>";
 }
 
 reverseString("nama peserta");
 reverseString("Sanbercode");
 reverseString("We Are Sanbers Developers");
+echo "<br>";
 
 echo "<h3>Soal No 3 Palindrome </h3>";
 

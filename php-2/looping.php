@@ -21,13 +21,13 @@
 
         echo "<h3>Soal No 1 Looping I Love PHP</h3>";
 
-        echo "<h4> LOOPING PERTAMA <br> </h2>";
+        echo "<h5> LOOPING PERTAMA <br> </h5>";
       
         for($i = 2; $i < 21 ; $i+=2 ){
         echo $i . " - I LOVE PHP <br> <br>";
         }
 
-        echo "<h4> LOOPING KEDUA <br> </h2>";
+        echo "<h5> LOOPING KEDUA <br> </h5>";
 
         for($i = 20; $i > 1 ; $i-=2 ){
         echo $i . " - I LOVE PHP <br> <br>";
