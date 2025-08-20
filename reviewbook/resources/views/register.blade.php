@@ -1,26 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Buat Account Baru!</h1>
-    <h3>Sign Up Form</h3>
+@extends('layout.master')
+@section('title')
+Register
+@endsection
+
+@section('content')
     <form action="/welcome" method ="POST">
         @csrf
-        <label>First name: </label> <br> <br>
+        <label>First name: </label> <br> 
         <input type="text" name = "first"> <br> <br> 
-        <label>Last name: </label> <br> <br>
+        <label>Last name: </label> <br>
         <input type="text" name = "last"> <br> <br>
 
-        <label>Gender:</label> <br> <br>
+        <label>Gender:</label> <br> 
         <input type="radio" name="gender">Wanita <br>
         <input type="radio"  name="gender">Pria <br>
         <input type="radio"  name="gender">Other <br> <br>
 
-        <label>Nationality:</label> <br> <br>
+        <label>Nationality:</label> <br>
         <select name="Kewarganegaraan">
             <option value="indonesia">Indonesia</option>
             <option value="malaysia">Malaysia</option>
@@ -29,15 +25,14 @@
             <option value="brunei">Brunei</option>
         </select> <br> <br>
 
-        <label>Language Spoken:</label> <br> <br>
+        <label>Language Spoken:</label> <br>
         <input type="checkbox" name="bahasa">Bahasa Indonesia <br>
         <input type="checkbox"  name="bahasa">English <br>
         <input type="checkbox"  name="bahasa">Other <br> <br>
 
-        <label>Bio:</label> <br> <br>
+        <label>Bio:</label> <br>
         <textarea name="bio" rows="10" cols="30"></textarea> <br> 
 
         <input type="submit" value="Sign Up">
     </form>
-</body>
-</html>
+@endsection
