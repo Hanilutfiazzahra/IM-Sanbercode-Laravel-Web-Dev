@@ -4,7 +4,12 @@ List Genre
 @endsection
 
 @section('content') 
+
+@auth 
 <a href="/genre/create" class="btn btn-primary btn-sm my-2">Tambah</a>
+
+@endauth
+
 
 <table class="table">
   <thead>
@@ -22,11 +27,13 @@ List Genre
       <td>
         <form method="POST" action="/genre/{{$genre->id}}">
         <a href="/genre/{{$genre->id}}" class="btn btn-info btn-sm">Detail</a>
+        @auth
         <a href="/genre/{{$genre->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
           @csrf
           @method('DELETE')
          <input type="submit" value="Delete" class="btn btn-danger btn-sm">
         </form>
+        @endauth
       </td>
     </tr>
     @empty

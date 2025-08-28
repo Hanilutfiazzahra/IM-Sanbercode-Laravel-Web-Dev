@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-Detail Kategori
+Detail Genre
 @endsection
 
 @section('content')
