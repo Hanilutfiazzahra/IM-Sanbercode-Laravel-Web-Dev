@@ -10,9 +10,5 @@ class FormController extends Controller
         return view('register');
     }
 
-    public function kirim(Request $request) {
-        $first = $request->input("first");
-        $last = $request->input("last");
-        return view('welcome', ['first' => $first, 'last' => $last]);
-    }
+
 }

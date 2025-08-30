@@ -15,4 +15,13 @@ class Book extends Model
         'stok',
         'genre_id',
     ];
+
+    public function genre() {
+        return $this->belongsTo(Genre::class, 'genre_id');
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class, 'book_id');
+    }
+
 }

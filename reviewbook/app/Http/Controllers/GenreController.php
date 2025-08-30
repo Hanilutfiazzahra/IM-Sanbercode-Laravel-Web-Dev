@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\Genre;
 
 class GenreController extends Controller
 {
@@ -26,7 +27,8 @@ class GenreController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect('/genre');
+        // Flash success message
+        return redirect('/genre')->with('success', 'Genre berhasil ditambahkan!');
     }
 
     public function index () {
@@ -36,7 +38,7 @@ class GenreController extends Controller
     }
 
     public function show ($id) {
-        $genre = DB::table('genres')->find($id);
+        $genre = Genre::find($id);
 
         return view('genre.detail', ['genre' => $genre]);
     }
@@ -59,15 +61,14 @@ class GenreController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return redirect('/genre');
+        // Flash success message
+        return redirect('/genre')->with('success', 'Genre berhasil diperbarui!');
     }
 
     public function destroy ($id) {
         DB::table('genres')->where('id', $id)->delete();
 
-        return redirect('/genre');
+        // Flash success message
+        return redirect('/genre')->with('success', 'Genre berhasil dihapus!');
     }
-
-
-    
 }

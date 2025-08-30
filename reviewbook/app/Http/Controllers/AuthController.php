@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Profile;
 
 class AuthController extends Controller
 {
@@ -32,7 +33,7 @@ class AuthController extends Controller
         $user->role = $userCount === 0 ? 'admin' : 'user'; // Set role based on user count
         $user->save();
 
-        return redirect('/')->with('success', 'Register Berhasil, Silahkan Login');
+        return redirect('/')->with('success', 'Register berhasil, silahkan login.');
     }
 
     public function showlogin()
@@ -48,7 +49,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with('success', 'Login Berhasil');
+            return redirect()->intended('/welcome')->with('success', 'Login Berhasil');
         }
 
         return back()->withErrors([
@@ -62,4 +63,54 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/')->with('success', 'Logout Berhasil');
     }
+
+    public function getprofile() {
+        $userAuth = Auth::User()->profile;
+    
+        $userId = Auth::id();
+        $profileData = Profile::where('user_id', $userId)->first();
+
+        // dd($userAuth);
+
+        if($userAuth) {
+            return view("profile.edit", ["profile" => $profileData]);
+        } else {
+            return view("profile.create");
+        }
+    }
+
+    public function createprofile(Request $request) {
+        $request->validate ([
+            'age' => 'required|numeric',
+            'address' => 'required|min:10',
+        ]);
+
+        $userId = Auth::id();
+
+        $profile = new Profile;
+        $profile->age = $request->input('age');
+        $profile->address = $request->input('address');
+        $profile->user_id = $userId;
+
+        $profile->save();
+        
+        return redirect('/profile')->with('success', 'Profil berhasil ditambahkan.');
+    }
+
+        public function updateprofile(Request $request, $id) {
+        $request->validate ([
+            'age' => 'required|numeric',
+            'address' => 'required|min:10',
+        ]);
+
+        $profile = Profile::find($id);
+        $profile->age = $request->input('age');
+        $profile->address = $request->input('address');
+
+        $profile->save();
+        
+        return redirect('/profile')->with('success', 'Profil berhasil diupdate.');
+    }
+        
+
 }

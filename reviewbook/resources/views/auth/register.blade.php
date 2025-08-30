@@ -1,41 +1,58 @@
-@extends('layout.master')
+@extends('layout.master2')
 @section('title')
 Register
 @endsection
 
 @section('content')
+<div class="d-flex justify-content-center mt-5">
+    <div class="card shadow-lg p-4 rounded-4" style="width: 450px;">
+        <h3 class="text-center mb-3 fw-bold text-primary">KataKita</h3>
+        
+        <form method="POST" action="/register">
+            @csrf
 
-<form method ="POST" action="/register">
-    @csrf
+            @if ($errors->any()) 
+                <div class="alert alert-danger rounded-3">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-    @if ($errors->any()) 
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+            <!-- Username -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold text-start d-block">Username</label>
+                <input type="text" class="form-control rounded-pill" name="name" placeholder="Masukkan username...">
+            </div>
 
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold text-start d-block">Email</label>
+                <input type="email" class="form-control rounded-pill" name="email" placeholder="Masukkan email...">
+            </div>
 
-  <div class="mb-3">
-    <label class="form-label">Username</label>
-    <input type="type" class="form-control" name="name">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Email</label>
-    <input type="email" class="form-control" name="email">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Password</label>
-    <input type="password" class="form-control" name="password">
-  </div>
-    <div class="mb-3">
-    <label class="form-label">Password Confirmation</label>
-    <input type="password" class="form-control" name="password_confirmation">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold text-start d-block">Password</label>
+                <input type="password" class="form-control rounded-pill" name="password" placeholder="••••••••">
+            </div>
 
+            <!-- Konfirmasi Password -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold text-start d-block">Konfirmasi Password</label>
+                <input type="password" class="form-control rounded-pill" name="password_confirmation" placeholder="••••••••">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 rounded-pill fw-bold">
+                Register
+            </button>
+
+            <p class="text-center mt-3">
+                Sudah punya akun? <a href="/login" class="text-decoration-none">Login</a>
+            </p>
+        </form>
+    </div>
+</div>
 @endsection

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Genre;
 use App\Models\Book;
 use File;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -14,9 +16,11 @@ class BookController extends Controller
      */
     public function index()
     {
+        // Get all books
         $book = Book::all();
-        return view('book.tampil', ['book' => $book
-        ]);
+
+        // Return the view with books data
+        return view('book.tampil', ['book' => $book]);
     }
 
     /**
@@ -24,9 +28,11 @@ class BookController extends Controller
      */
     public function create()
     {
+        // Get all genres for the form dropdown
         $genre = Genre::all();
-        return view('book.tambah', ['genre' => $genre
-        ]);
+
+        // Return the form view with genre data
+        return view('book.tambah', ['genre' => $genre]);
     }
 
     /**
@@ -34,6 +40,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate the incoming request
         $request->validate([
             'title' => 'required',
             'summary' => 'required',
@@ -42,9 +49,11 @@ class BookController extends Controller
             'genre_id' => 'required',
         ]);
 
-        $newImageName = time().'.'.$request->image->extension();
+        // Process the image upload
+        $newImageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('image'), $newImageName);
 
+        // Create new book and save to database
         $book = new Book;
         $book->title = $request->input('title');
         $book->summary = $request->input('summary');
@@ -52,7 +61,9 @@ class BookController extends Controller
         $book->image = $newImageName;
         $book->genre_id = $request->input('genre_id');
         $book->save();
-        return redirect('/book');
+
+        // Flash success message and redirect
+        return redirect('/book')->with('success', 'Buku berhasil ditambahkan!');
     }
 
     /**
@@ -60,9 +71,11 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
+        // Find the book by ID
         $book = Book::find($id);
-        return view('book.detail', ['book' => $book
-        ]);
+
+        // Return the detail view with book data
+        return view('book.detail', ['book' => $book]);
     }
 
     /**
@@ -70,10 +83,14 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
+        // Get all genres for the form dropdown
         $genre = Genre::all();
+
+        // Find the book by ID
         $book = Book::find($id);
-        return view('book.edit', ['book' => $book, 'genre' => $genre
-        ]);
+
+        // Return the edit form with book and genre data
+        return view('book.edit', ['book' => $book, 'genre' => $genre]);
     }
 
     /**
@@ -81,6 +98,7 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Validate the incoming request
         $request->validate([
             'title' => 'required',
             'summary' => 'required',
@@ -89,19 +107,26 @@ class BookController extends Controller
             'genre_id' => 'required',
         ]);
 
+        // Find the book by ID
         $book = Book::find($id);
+
+        // If image is uploaded, delete old one and upload new image
         if ($request->has('image')) {
-            File::delete('image/'.$book->image);
-            $newImageName = time().'.'.$request->image->extension();
+            File::delete('image/' . $book->image);
+            $newImageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('image'), $newImageName);
             $book->image = $newImageName;
         }
+
+        // Update book details
         $book->title = $request->input('title');
         $book->summary = $request->input('summary');
         $book->stok = $request->input('stok');
         $book->genre_id = $request->input('genre_id');
         $book->save();
-        return redirect('/book');
+
+        // Flash success message and redirect
+        return redirect('/book')->with('success', 'Buku berhasil diperbarui!');
     }
 
     /**
@@ -109,9 +134,17 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
+        // Find the book by ID
         $book = Book::find($id);
-        File::delete('image/'.$book->image);
+
+        // Delete the associated image file
+        File::delete('image/' . $book->image);
+
+        // Delete the book record from the database
         $book->delete();
-        return redirect('/book');
+
+        // Flash success message and redirect
+        return redirect('/book')->with('success', 'Buku berhasil dihapus!');
     }
 }
+
