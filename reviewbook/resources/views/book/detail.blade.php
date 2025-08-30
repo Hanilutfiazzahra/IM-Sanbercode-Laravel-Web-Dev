@@ -95,4 +95,6 @@ Detail Buku
     </div>
 </div>
 @endauth
+
+<a href="/book" class="btn btn-secondary btn-sm">Kembali</a>
 @endsection

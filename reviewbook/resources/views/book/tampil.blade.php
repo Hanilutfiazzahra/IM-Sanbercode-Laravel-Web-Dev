@@ -52,10 +52,10 @@ Daftar Buku
 @endif
 
 <!-- Book Table -->
-<div class="row">
+<div class="row"> <!-- Add margin-top here -->
     @forelse ($book as $item)
     <div class="col-4">
-        <div class="card">
+        <div class="card mt-4">
             <img src="{{ asset('image/'.$item->image) }}" 
                  class="card-img-top bg-light" 
                  style="height: 300px; object-fit: contain;" 

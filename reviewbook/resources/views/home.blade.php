@@ -252,8 +252,8 @@
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
             <div class="testimonial-item">
               <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-              <h3>Cale Henituse</h3>
-              <h4>Mahasiswa</h4>
+              <h3>Meikito</h3>
+              <h4>Penulis</h4>
               <div class="stars">
                 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
               </div>
