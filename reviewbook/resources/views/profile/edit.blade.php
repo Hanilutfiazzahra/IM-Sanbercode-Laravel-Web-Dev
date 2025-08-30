@@ -5,15 +5,17 @@ Edit Profile
 
 @section('content')
 
-@if (session('success'))
-    <script>
-        Swal.fire({
-            title: 'Berhasil!',
-            text: '{{ session('success') }}',
-            icon: 'success',
-            confirmButtonText: 'Tutup'
-        });
-    </script>
+@if(session('success'))
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+      })
+    });
+  </script>
 @endif
 
 <div class="container my-5">

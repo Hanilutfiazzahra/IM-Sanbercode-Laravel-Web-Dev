@@ -15,17 +15,17 @@ Daftar Genre
 <br> <br>
 
 <!-- SweetAlert2 Script -->
-@if (session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: '{{ session('success') }}',
-            showConfirmButton: true, // Tombol OK akan muncul
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#3085d6'
-        })
-    </script>
+@if(session('success'))
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+      })
+    });
+  </script>
 @endif
 
 @if (session('error'))

@@ -4,6 +4,20 @@ Buat Profile
 @endsection
 
 @section('content')
+
+@if(session('success'))
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+      })
+    });
+  </script>
+@endif
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">

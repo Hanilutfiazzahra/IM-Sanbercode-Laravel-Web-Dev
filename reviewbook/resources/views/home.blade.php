@@ -38,7 +38,7 @@
 
 <body class="index-page">
 
-@include('partial.header2')
+@include('partial.header')
 
   <main class="main">
 

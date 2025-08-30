@@ -14,23 +14,18 @@ Daftar Buku
 
 <br> <br>
 
-<!-- SweetAlert2 Script for Success and Error -->
-@if (session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: '{{ session('success') }}',
-            showConfirmButton: true, // Menampilkan tombol OK
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#3085d6'
-        }).then((result) => {
-            // Jika OK diklik, tidak ada refresh halaman, cukup tutup pop-up
-            if (result.isConfirmed) {
-                Swal.close(); // Menutup pop-up
-            }
-        });
-    </script>
+
+@if(session('success'))
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+      })
+    });
+  </script>
 @endif
 
 @if (session('error'))
@@ -39,20 +34,19 @@ Daftar Buku
             icon: 'error',
             title: 'Oops...',
             text: '{{ session('error') }}',
-            showConfirmButton: true, // Tombol OK di error
+            showConfirmButton: true, 
             confirmButtonText: 'OK',
             confirmButtonColor: '#d33'
         }).then((result) => {
-            // Jika OK diklik, tidak ada refresh halaman, cukup tutup pop-up
             if (result.isConfirmed) {
-                Swal.close(); // Menutup pop-up
+                Swal.close(); 
             }
         });
     </script>
 @endif
 
 <!-- Book Table -->
-<div class="row"> <!-- Add margin-top here -->
+<div class="row"> 
     @forelse ($book as $item)
     <div class="col-4">
         <div class="card mt-4">
@@ -98,7 +92,6 @@ Daftar Buku
 </div>
 
 <script>
-    // SweetAlert2 Confirmation for Delete
     function confirmDelete(event) {
         Swal.fire({
             title: 'Apa kamu yakin?',
@@ -109,11 +102,11 @@ Daftar Buku
             cancelButtonText: 'Batal',
         }).then((result) => {
             if (result.isConfirmed) {
-                // If confirmed, submit the form manually
-                event.target.submit(); // Submit form if confirmed
+                
+                event.target.submit(); 
             }
         });
-        return false; // Prevent form from submitting immediately
+        return false; 
     }
 </script>
 

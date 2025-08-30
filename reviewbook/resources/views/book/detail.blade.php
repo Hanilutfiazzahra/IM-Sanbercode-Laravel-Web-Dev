@@ -54,8 +54,9 @@ Detail Buku
 
 <hr>
 
-<h4>Buat Komentar</h4>
+
 @auth
+<h4>Buat Komentar</h4>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8"> <!-- Sesuaikan lebar kolom -->

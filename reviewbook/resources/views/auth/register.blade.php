@@ -1,4 +1,4 @@
-@extends('layout.master2')
+@extends('layout.master')
 @section('title')
 Register
 @endsection
